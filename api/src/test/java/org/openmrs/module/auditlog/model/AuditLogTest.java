@@ -86,4 +86,18 @@ public class AuditLogTest {
         assertNull(responsePayload.get("patientId"));
     }
 
+
+    @Test
+    public void map_shouldGiveUserNameAsNullIfUserIsNull() throws Exception {
+        auditLog.setUser(null);
+        when(patient.getPatientIdentifier()).thenReturn(null);
+
+        SimpleObject responsePayload = auditLog.map();
+        assertEquals(Integer.valueOf(1), responsePayload.get("auditLogId"));
+        assertEquals(dateCreated, responsePayload.get("dateCreated"));
+        assertEquals("EVENT_TYPE", responsePayload.get("eventType"));
+        assertEquals("dummy message", responsePayload.get("message"));
+        assertEquals(null, responsePayload.get("userId"));
+        assertEquals(null, responsePayload.get("patientId"));
+    }
 }

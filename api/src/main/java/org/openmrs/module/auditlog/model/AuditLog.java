@@ -78,12 +78,13 @@ public class AuditLog implements Serializable {
     public SimpleObject map() {
         PatientIdentifier patientIdentifier = patient != null ? patient.getPatientIdentifier() : null;
         String identifier = patientIdentifier != null ? patientIdentifier.getIdentifier() : null;
+        String userName = user != null ? user.getUsername() : null;
         SimpleObject response = new SimpleObject();
         response.add("patientId", identifier);
         response.add("auditLogId", auditLogId);
         response.add("dateCreated", dateCreated);
         response.add("eventType", eventType);
-        response.add("userId", user.getUsername());
+        response.add("userId", userName);
         response.add("message", message);
         return response;
     }

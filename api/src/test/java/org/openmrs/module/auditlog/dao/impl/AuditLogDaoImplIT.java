@@ -13,8 +13,6 @@ import org.openmrs.module.auditlog.BaseIntegrationTest;
 import org.openmrs.module.auditlog.util.DateUtil;
 import org.openmrs.module.auditlog.dao.AuditLogDao;
 import org.openmrs.module.auditlog.model.AuditLog;
-import org.openmrs.test.BaseModuleContextSensitiveTest;
-import org.openmrs.web.test.BaseWebContextSensitiveTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -131,24 +129,33 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
 
     @Test
     public void getLogs_shouldGiveLogsInDescendingIfItIsDefaultView() throws Exception {
+        AuditLogDaoImpl.LIMIT = 3;
         List<AuditLog> logs = auditLogDao.getLogs(null, null, null, null, false, true);
-        assertEquals(2, logs.size());
+        assertEquals(3, logs.size());
         AuditLog auditLog_1 = logs.get(0);
         AuditLog auditLog_2 = logs.get(1);
+        AuditLog auditLog_3 = logs.get(2);
 
-        assertEquals("VIEWED_CLINICAL_DASHBOARD message", auditLog_1.getMessage());
-        assertEquals("VIEWED_CLINICAL", auditLog_1.getEventType());
-        assertEquals(Integer.valueOf(5), auditLog_1.getAuditLogId());
-        assertEquals("thor", auditLog_1.getUser().getUsername());
-        assertEquals("BAH200001", auditLog_1.getPatient().getPatientIdentifier().getIdentifier());
-        assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87e", auditLog_1.getUuid());
+        assertEquals("LOGIN_FAILED message", auditLog_1.getMessage());
+        assertEquals("LOGIN_FAILED", auditLog_1.getEventType());
+        assertEquals(Integer.valueOf(6), auditLog_1.getAuditLogId());
+        assertEquals(null, auditLog_1.getUser());
+        assertEquals(null, auditLog_1.getPatient());
+        assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87f", auditLog_1.getUuid());
 
-        assertEquals("VIEWED_DASHBOARD message", auditLog_2.getMessage());
-        assertEquals("VIEWED_DASHBOARD", auditLog_2.getEventType());
-        assertEquals(Integer.valueOf(4), auditLog_2.getAuditLogId());
-        assertEquals("superuser", auditLog_2.getUser().getUsername());
-        assertEquals("GAN200000", auditLog_2.getPatient().getPatientIdentifier().getIdentifier());
-        assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87d", auditLog_2.getUuid());
+        assertEquals("VIEWED_CLINICAL_DASHBOARD message", auditLog_2.getMessage());
+        assertEquals("VIEWED_CLINICAL", auditLog_2.getEventType());
+        assertEquals(Integer.valueOf(5), auditLog_2.getAuditLogId());
+        assertEquals("thor", auditLog_2.getUser().getUsername());
+        assertEquals("BAH200001", auditLog_2.getPatient().getPatientIdentifier().getIdentifier());
+        assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87e", auditLog_2.getUuid());
+
+        assertEquals("VIEWED_DASHBOARD message", auditLog_3.getMessage());
+        assertEquals("VIEWED_DASHBOARD", auditLog_3.getEventType());
+        assertEquals(Integer.valueOf(4), auditLog_3.getAuditLogId());
+        assertEquals("superuser", auditLog_3.getUser().getUsername());
+        assertEquals("GAN200000", auditLog_3.getPatient().getPatientIdentifier().getIdentifier());
+        assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87d", auditLog_3.getUuid());
     }
 
     @Test

@@ -30,4 +30,14 @@
         </sql>
     </changeSet>
 
+    <changeSet id="modify-auditlogtable-201705231230" author="Shashi">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="audit_log" />
+        </preConditions>
+
+        <sql>
+            ALTER TABLE audit_log MODIFY user_id INT(11);
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

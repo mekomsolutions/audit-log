@@ -30,7 +30,10 @@ public class AuditLogServiceImpl implements AuditLogService {
 
     public void createAuditLog(AuditLogPayload log) {
         User user = Context.getAuthenticatedUser();
-        Patient patient = Context.getPatientService().getPatientByUuid(log.getPatientUuid());
+        Patient patient = null;
+        if (log.getPatientUuid() != null){
+            patient = Context.getPatientService().getPatientByUuid(log.getPatientUuid());
+        }
         AuditLog auditLog = new AuditLog();
         auditLog.setEventType(log.getEventType());
         auditLog.setUser(user);

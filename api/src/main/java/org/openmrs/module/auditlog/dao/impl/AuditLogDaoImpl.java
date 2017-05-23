@@ -5,6 +5,7 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.openmrs.Patient;
 import org.openmrs.api.PatientService;
 import org.openmrs.module.auditlog.dao.AuditLogDao;
@@ -33,7 +34,7 @@ public class AuditLogDaoImpl implements AuditLogDao {
         // prev will be always not null boolean value
         List<AuditLog> logs = new ArrayList<AuditLog>();
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(AuditLog.class, "auditLog");
-        criteria.createAlias("auditLog.user", "user");
+        criteria.createAlias("auditLog.user", "user", JoinType.LEFT_OUTER_JOIN);
 
         criteria.setMaxResults(LIMIT);
         if (prev || defaultView) {
