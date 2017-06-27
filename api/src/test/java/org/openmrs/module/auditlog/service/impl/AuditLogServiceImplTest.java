@@ -1,6 +1,8 @@
 package org.openmrs.module.auditlog.service.impl;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +23,6 @@ import org.openmrs.module.webservices.rest.SimpleObject;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -84,6 +85,7 @@ public class AuditLogServiceImplTest {
         auditLog_1.setDateCreated(dateCreated_1);
         auditLog_1.setEventType("event_type_1");
         auditLog_1.setUuid("uuid1");
+        auditLog_1.setModule("clinical");
 
         auditLog_2.setPatient(patient_2);
         auditLog_2.setMessage("message 2");
@@ -92,6 +94,7 @@ public class AuditLogServiceImplTest {
         auditLog_2.setDateCreated(dateCreated_2);
         auditLog_2.setEventType("event_type_2");
         auditLog_2.setUuid("uuid2");
+        auditLog_2.setModule("reports");
 
         mockAuditLogs.add(auditLog_1);
         mockAuditLogs.add(auditLog_2);
@@ -110,6 +113,7 @@ public class AuditLogServiceImplTest {
         assertEquals("event_type_1", auditLogResponse_1.get("eventType"));
         assertEquals(dateCreated_1, auditLogResponse_1.get("dateCreated"));
         assertEquals(Integer.valueOf(1), auditLogResponse_1.get("auditLogId"));
+        assertEquals("clinical", auditLogResponse_1.get("module"));
 
         assertEquals("message 2", auditLogResponse_2.get("message"));
         assertEquals("GAN2001", auditLogResponse_2.get("patientId"));
@@ -117,12 +121,13 @@ public class AuditLogServiceImplTest {
         assertEquals("event_type_2", auditLogResponse_2.get("eventType"));
         assertEquals(dateCreated_2, auditLogResponse_2.get("dateCreated"));
         assertEquals(Integer.valueOf(2), auditLogResponse_2.get("auditLogId"));
+        assertEquals("reports", auditLogResponse_2.get("module"));
     }
 
     @Test
     public void shouldCreateAuditLog() throws Exception {
         String patientUuid = "patientUuid";
-        AuditLogPayload log = new AuditLogPayload(patientUuid, "message", "eventType");
+        AuditLogPayload log = new AuditLogPayload(patientUuid, "message", "eventType", "registration");
         mockStatic(Context.class);
         User user = new User();
         user.setName("auditlogger");
@@ -140,6 +145,53 @@ public class AuditLogServiceImplTest {
         Assert.assertEquals(patientUuid, argument.getValue().getPatient().getUuid());
         Assert.assertEquals(log.getMessage(), argument.getValue().getMessage());
         Assert.assertEquals(log.getEventType(), argument.getValue().getEventType());
+        Assert.assertEquals(log.getModule(), argument.getValue().getModule());
+    }
 
+    @Test
+    public void shouldCreateAuditLogWithParams() throws Exception {
+        String patientUuid = "patientUuid";
+        mockStatic(Context.class);
+        User user = new User();
+        user.setName("auditlogger");
+        when(Context.getAuthenticatedUser()).thenReturn(user);
+        when(Context.getPatientService()).thenReturn(patientService);
+        Patient patient = new Patient();
+        patient.setUuid(patientUuid);
+        when(patientService.getPatientByUuid(patientUuid)).thenReturn(patient);
+        
+        ArgumentCaptor<AuditLog> argument = ArgumentCaptor.forClass(AuditLog.class);
+        Map<String, String> messageParams = new HashMap<>();
+        messageParams.put("encounterUuid", "81f57a25-3f10-11e4-821f-0800271c1b75");
+        messageParams.put("encounterType", "REG");
+        auditLogService.createAuditLog(patientUuid, "eventType", "message", messageParams, "registration");
+        String savedMessage = "message~{\"encounterUuid\":\"81f57a25-3f10-11e4-821f-0800271c1b75\",\"encounterType\":\"REG\"}";
+        verify(auditLogDao).saveAuditLog(argument.capture());
+        Assert.assertEquals(patientUuid, argument.getValue().getPatient().getUuid());
+        Assert.assertEquals(savedMessage, argument.getValue().getMessage());
+        Assert.assertEquals("eventType", argument.getValue().getEventType());
+        Assert.assertEquals("registration", argument.getValue().getModule());
+    }
+    
+    @Test
+    public void shouldIgnoreParamsIfIsEmptyWhenCreateAuditLogWithParams() throws Exception {
+        String patientUuid = "patientUuid";
+        mockStatic(Context.class);
+        User user = new User();
+        user.setName("auditlogger");
+        when(Context.getAuthenticatedUser()).thenReturn(user);
+        when(Context.getPatientService()).thenReturn(patientService);
+        Patient patient = new Patient();
+        patient.setUuid(patientUuid);
+        when(patientService.getPatientByUuid(patientUuid)).thenReturn(patient);
+        
+        ArgumentCaptor<AuditLog> argument = ArgumentCaptor.forClass(AuditLog.class);
+        Map<String, String> messageParams = new HashMap<>();
+        auditLogService.createAuditLog(patientUuid, "eventType", "message", messageParams, "registration");
+        verify(auditLogDao).saveAuditLog(argument.capture());
+        Assert.assertEquals(patientUuid, argument.getValue().getPatient().getUuid());
+        Assert.assertEquals("message", argument.getValue().getMessage());
+        Assert.assertEquals("eventType", argument.getValue().getEventType());
+        Assert.assertEquals("registration", argument.getValue().getModule());
     }
 }

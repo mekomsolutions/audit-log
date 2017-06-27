@@ -13,6 +13,7 @@
         <property name="eventType" type="java.lang.String" column="event_type"/>
         <property name="message" type="java.lang.String" column="message"/>
         <property name="uuid" type="java.lang.String" column="uuid"/>
+        <property name="module" type="java.lang.String" column="module"/>
 
         <many-to-one name="user" class="org.openmrs.User" column="user_id"/>
         <many-to-one name="patient" class="org.openmrs.Patient" column="patient_id"/>

@@ -40,4 +40,14 @@
         </sql>
     </changeSet>
 
+    <changeSet id="add-module-column-to-auditlogtable-201706160509" author="Shruthi P,Pushpa">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="audit_log" />
+            <not><columnExists tableName="audit_log" columnName="module" /></not>
+        </preConditions>
+        <sql>
+            ALTER TABLE audit_log ADD COLUMN module VARCHAR(100);
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

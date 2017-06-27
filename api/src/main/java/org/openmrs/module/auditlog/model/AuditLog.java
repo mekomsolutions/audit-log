@@ -17,6 +17,7 @@ public class AuditLog implements Serializable {
     private String message;
     private Date dateCreated;
     private String uuid;
+    private String module;
 
     public Integer getAuditLogId() {
         return auditLogId;
@@ -74,6 +75,14 @@ public class AuditLog implements Serializable {
     public void setUser(User provider) {
         this.user = provider;
     }
+    
+    public String getModule() {
+        return module;
+    }
+    
+    public void setModule(String module) {
+        this.module = module;
+    }
 
     public SimpleObject map() {
         PatientIdentifier patientIdentifier = patient != null ? patient.getPatientIdentifier() : null;
@@ -86,6 +95,7 @@ public class AuditLog implements Serializable {
         response.add("eventType", eventType);
         response.add("userId", userName);
         response.add("message", message);
+        response.add("module", module);
         return response;
     }
 }

@@ -41,6 +41,7 @@ public class AuditLogTest {
         auditLog.setUuid("dummy uuid");
         auditLog.setUser(user);
         auditLog.setPatient(patient);
+        auditLog.setModule("registration");
     }
 
     @Test
@@ -56,6 +57,7 @@ public class AuditLogTest {
         assertEquals("dummy message", responsePayload.get("message"));
         assertEquals("superman",responsePayload.get("userId"));
         assertEquals("GAN2001", responsePayload.get("patientId"));
+        assertEquals("registration", responsePayload.get("module"));
     }
 
     @Test
@@ -69,6 +71,7 @@ public class AuditLogTest {
         assertEquals("EVENT_TYPE", responsePayload.get("eventType"));
         assertEquals("dummy message", responsePayload.get("message"));
         assertEquals("superman",responsePayload.get("userId"));
+        assertEquals("registration", responsePayload.get("module"));
         assertNull(responsePayload.get("patientId"));
     }
 
@@ -83,6 +86,7 @@ public class AuditLogTest {
         assertEquals("EVENT_TYPE", responsePayload.get("eventType"));
         assertEquals("dummy message", responsePayload.get("message"));
         assertEquals("superman",responsePayload.get("userId"));
+        assertEquals("registration", responsePayload.get("module"));
         assertNull(responsePayload.get("patientId"));
     }
 
@@ -97,6 +101,7 @@ public class AuditLogTest {
         assertEquals(dateCreated, responsePayload.get("dateCreated"));
         assertEquals("EVENT_TYPE", responsePayload.get("eventType"));
         assertEquals("dummy message", responsePayload.get("message"));
+        assertEquals("registration", responsePayload.get("module"));
         assertEquals(null, responsePayload.get("userId"));
         assertEquals(null, responsePayload.get("patientId"));
     }

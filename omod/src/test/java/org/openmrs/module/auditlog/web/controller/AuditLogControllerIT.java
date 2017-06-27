@@ -32,6 +32,7 @@ public class AuditLogControllerIT extends BaseIntegrationTest {
         assertEquals("VIEWED_CLINICAL", log_4.get("eventType").getAsString());
         assertEquals("thor", log_4.get("userId").getAsString());
         assertEquals("VIEWED_CLINICAL_DASHBOARD message", log_4.get("message").getAsString());
+        assertEquals("clinical", log_4.get("module").getAsString());
 
         JsonObject log_3 = logs.get(2).getAsJsonObject();
         assertEquals("GAN200000", log_3.get("patientId").getAsString());
@@ -39,6 +40,7 @@ public class AuditLogControllerIT extends BaseIntegrationTest {
         assertEquals("VIEWED_DASHBOARD", log_3.get("eventType").getAsString());
         assertEquals("superuser", log_3.get("userId").getAsString());
         assertEquals("VIEWED_DASHBOARD message", log_3.get("message").getAsString());
+        assertEquals("clinical", log_4.get("module").getAsString());
 
         JsonObject log_2 = logs.get(1).getAsJsonObject();
         assertEquals("SEM200000", log_2.get("patientId").getAsString());
@@ -46,6 +48,7 @@ public class AuditLogControllerIT extends BaseIntegrationTest {
         assertEquals("EDIT_CLINICAL", log_2.get("eventType").getAsString());
         assertEquals("spiderman", log_2.get("userId").getAsString());
         assertEquals("EDIT_CLINICAL message", log_2.get("message").getAsString());
+        assertEquals("clinical", log_4.get("module").getAsString());
 
         JsonObject log_1 = logs.get(0).getAsJsonObject();
         assertEquals("GAN200000", log_1.get("patientId").getAsString());
@@ -53,6 +56,7 @@ public class AuditLogControllerIT extends BaseIntegrationTest {
         assertEquals("VIEWED_CLINICAL", log_1.get("eventType").getAsString());
         assertEquals("batman", log_1.get("userId").getAsString());
         assertEquals("VIEWED_CLINICAL_DASHBOARD message", log_1.get("message").getAsString());
+        assertEquals("clinical", log_4.get("module").getAsString());
     }
 
     @Test
@@ -69,6 +73,7 @@ public class AuditLogControllerIT extends BaseIntegrationTest {
         assertEquals("VIEWED_CLINICAL", log_1.get("eventType").getAsString());
         assertEquals("thor", log_1.get("userId").getAsString());
         assertEquals("VIEWED_CLINICAL_DASHBOARD message", log_1.get("message").getAsString());
+        assertEquals("clinical", log_1.get("module").getAsString());
 
         JsonObject log_2 = logs.get(1).getAsJsonObject();
         assertEquals("GAN200000", log_2.get("patientId").getAsString());
@@ -76,6 +81,7 @@ public class AuditLogControllerIT extends BaseIntegrationTest {
         assertEquals("VIEWED_DASHBOARD", log_2.get("eventType").getAsString());
         assertEquals("superuser", log_2.get("userId").getAsString());
         assertEquals("VIEWED_DASHBOARD message", log_2.get("message").getAsString());
+        assertEquals("admin", log_2.get("module").getAsString());
 
         JsonObject log_3 = logs.get(2).getAsJsonObject();
         assertEquals("SEM200000", log_3.get("patientId").getAsString());
@@ -83,6 +89,7 @@ public class AuditLogControllerIT extends BaseIntegrationTest {
         assertEquals("EDIT_CLINICAL", log_3.get("eventType").getAsString());
         assertEquals("spiderman", log_3.get("userId").getAsString());
         assertEquals("EDIT_CLINICAL message", log_3.get("message").getAsString());
+        assertEquals("clinical", log_3.get("module").getAsString());
 
         JsonObject log_4 = logs.get(3).getAsJsonObject();
         assertEquals("GAN200000", log_4.get("patientId").getAsString());
@@ -90,6 +97,7 @@ public class AuditLogControllerIT extends BaseIntegrationTest {
         assertEquals("VIEWED_CLINICAL", log_4.get("eventType").getAsString());
         assertEquals("batman", log_4.get("userId").getAsString());
         assertEquals("VIEWED_CLINICAL_DASHBOARD message", log_4.get("message").getAsString());
+        assertEquals("clinical", log_4.get("module").getAsString());
 
     }
 

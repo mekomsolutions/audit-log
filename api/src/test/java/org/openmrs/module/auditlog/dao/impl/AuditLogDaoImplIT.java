@@ -51,6 +51,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("spiderman", auditLog_1.getUser().getUsername());
         assertEquals("SEM200000", auditLog_1.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87c", auditLog_1.getUuid());
+        assertEquals("clinical", auditLog_1.getModule());
 
         assertEquals("VIEWED_DASHBOARD message", auditLog_2.getMessage());
         assertEquals("VIEWED_DASHBOARD", auditLog_2.getEventType());
@@ -58,6 +59,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("superuser", auditLog_2.getUser().getUsername());
         assertEquals("GAN200000", auditLog_2.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87d", auditLog_2.getUuid());
+        assertEquals("admin", auditLog_2.getModule());
     }
 
     @Test
@@ -73,6 +75,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("spiderman", auditLog_1.getUser().getUsername());
         assertEquals("SEM200000", auditLog_1.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87c", auditLog_1.getUuid());
+        assertEquals("clinical", auditLog_1.getModule());
 
         assertEquals("VIEWED_DASHBOARD message", auditLog_2.getMessage());
         assertEquals("VIEWED_DASHBOARD", auditLog_2.getEventType());
@@ -80,6 +83,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("superuser", auditLog_2.getUser().getUsername());
         assertEquals("GAN200000", auditLog_2.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87d", auditLog_2.getUuid());
+        assertEquals("admin", auditLog_2.getModule());
     }
 
     @Test
@@ -95,6 +99,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("batman", auditLog_1.getUser().getUsername());
         assertEquals("GAN200000", auditLog_1.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb67a", auditLog_1.getUuid());
+        assertEquals("clinical", auditLog_1.getModule());
 
         assertEquals("EDIT_CLINICAL message", auditLog_2.getMessage());
         assertEquals("EDIT_CLINICAL", auditLog_2.getEventType());
@@ -102,6 +107,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("spiderman", auditLog_2.getUser().getUsername());
         assertEquals("SEM200000", auditLog_2.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87c", auditLog_2.getUuid());
+        assertEquals("clinical", auditLog_2.getModule());
 
     }
 
@@ -118,6 +124,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("spiderman", auditLog_1.getUser().getUsername());
         assertEquals("SEM200000", auditLog_1.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87c", auditLog_1.getUuid());
+        assertEquals("clinical", auditLog_1.getModule());
 
         assertEquals("VIEWED_DASHBOARD message", auditLog_2.getMessage());
         assertEquals("VIEWED_DASHBOARD", auditLog_2.getEventType());
@@ -125,6 +132,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("superuser", auditLog_2.getUser().getUsername());
         assertEquals("GAN200000", auditLog_2.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87d", auditLog_2.getUuid());
+        assertEquals("admin", auditLog_2.getModule());
     }
 
     @Test
@@ -142,6 +150,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals(null, auditLog_1.getUser());
         assertEquals(null, auditLog_1.getPatient());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87f", auditLog_1.getUuid());
+        assertEquals("login", auditLog_1.getModule());
 
         assertEquals("VIEWED_CLINICAL_DASHBOARD message", auditLog_2.getMessage());
         assertEquals("VIEWED_CLINICAL", auditLog_2.getEventType());
@@ -149,6 +158,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("thor", auditLog_2.getUser().getUsername());
         assertEquals("BAH200001", auditLog_2.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87e", auditLog_2.getUuid());
+        assertEquals("clinical", auditLog_2.getModule());
 
         assertEquals("VIEWED_DASHBOARD message", auditLog_3.getMessage());
         assertEquals("VIEWED_DASHBOARD", auditLog_3.getEventType());
@@ -156,6 +166,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("superuser", auditLog_3.getUser().getUsername());
         assertEquals("GAN200000", auditLog_3.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87d", auditLog_3.getUuid());
+        assertEquals("admin", auditLog_3.getModule());
     }
 
     @Test
@@ -170,6 +181,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("batman", auditLog.getUser().getUsername());
         assertEquals("GAN200000", auditLog.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb67a", auditLog.getUuid());
+        assertEquals("clinical", auditLog.getModule());
     }
 
     @Test
@@ -186,6 +198,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("batman", auditLog_1.getUser().getUsername());
         assertEquals("GAN200000", auditLog_1.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb67a", auditLog_1.getUuid());
+        assertEquals("clinical", auditLog_1.getModule());
 
         assertEquals("VIEWED_DASHBOARD message", auditLog_2.getMessage());
         assertEquals("VIEWED_DASHBOARD", auditLog_2.getEventType());
@@ -193,6 +206,7 @@ public class AuditLogDaoImplIT extends BaseIntegrationTest {
         assertEquals("superuser", auditLog_2.getUser().getUsername());
         assertEquals("GAN200000", auditLog_2.getPatient().getPatientIdentifier().getIdentifier());
         assertEquals("86526ed5-3c11-11de-a0ba-001e378eb87d", auditLog_2.getUuid());
+        assertEquals("admin", auditLog_2.getModule());
     }
 
     @Test

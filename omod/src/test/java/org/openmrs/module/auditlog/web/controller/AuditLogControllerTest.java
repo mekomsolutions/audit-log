@@ -91,7 +91,7 @@ public class AuditLogControllerTest {
 
     @Test
     public void shouldSaveAuditLog() throws Exception{
-        AuditLogPayload log = new AuditLogPayload("patientUuid", "message" ,"eventType");
+        AuditLogPayload log = new AuditLogPayload("patientUuid", "message" ,"eventType","module");
         auditLogController.createAuditLog(log);
         verify(auditLogService, times(1)).createAuditLog(log);
     }

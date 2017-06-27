@@ -1,5 +1,6 @@
 package org.openmrs.module.auditlog.service;
 
+import java.util.Map;
 import org.openmrs.module.auditlog.contract.AuditLogPayload;
 import org.openmrs.module.webservices.rest.SimpleObject;
 
@@ -11,4 +12,5 @@ public interface AuditLogService {
                                     Boolean prev, Boolean defaultView);
 
     void createAuditLog(AuditLogPayload log);
+    void createAuditLog(String patientUuid, String eventType, String message, Map<String, String> messageParams, String module);
 }

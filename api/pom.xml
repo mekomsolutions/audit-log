@@ -85,8 +85,28 @@
 			<scope>test</scope>
 			<type>test-jar</type>
 		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>reporting-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>calculation-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>serialization.xstream-api-2.0</artifactId>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160212</version>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
     <parent>
 		<groupId>org.openmrs.module</groupId>
