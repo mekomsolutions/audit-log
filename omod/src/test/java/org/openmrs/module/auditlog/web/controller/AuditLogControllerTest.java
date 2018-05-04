@@ -65,7 +65,7 @@ public class AuditLogControllerTest {
     @Test
     public void shouldExceptionIfUserIsNOtPrivileges() throws Exception {
         when(userContext.isAuthenticated()).thenReturn(true);
-        when(userContext.hasPrivilege("admin")).thenReturn(false);
+        when(userContext.hasPrivilege("app:admin")).thenReturn(false);
 
         thrown.expect(APIException.class);
         thrown.expectMessage("User is logged in but does not have sufficient privileges");
@@ -78,7 +78,7 @@ public class AuditLogControllerTest {
     public void shouldGiveAuditLogs() throws Exception {
         Date startDateTime = DateUtil.convertToLocalDateFromUTC("2017-03-22T18:30:00.000Z");
         when(userContext.isAuthenticated()).thenReturn(true);
-        when(userContext.hasPrivilege("admin")).thenReturn(true);
+        when(userContext.hasPrivilege("app:admin")).thenReturn(true);
         when(auditLogService.getLogs("username", "patientId", startDateTime,
                 1, null, false)).thenReturn(new ArrayList<>());
 
