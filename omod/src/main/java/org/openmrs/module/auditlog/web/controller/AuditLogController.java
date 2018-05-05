@@ -35,7 +35,7 @@ public class AuditLogController {
                                            @RequestParam(value = "defaultView", required = false, defaultValue = "false") Boolean defaultView) throws ParseException {
         UserContext userContext = Context.getUserContext();
         if (userContext.isAuthenticated()) {
-            if (userContext.hasPrivilege("admin")) {
+            if (userContext.hasPrivilege("app:admin")) {
                 Date startDateTime = DateUtil.convertToLocalDateFromUTC(startFrom);
                 return auditLogService.getLogs(username, patientId, startDateTime, lastAuditLogId, prev, defaultView);
             } else {
