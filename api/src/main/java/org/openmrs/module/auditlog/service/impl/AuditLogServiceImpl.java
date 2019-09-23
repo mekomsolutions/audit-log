@@ -32,13 +32,11 @@ public class AuditLogServiceImpl implements AuditLogService {
         this.auditLogDao = auditLogDao;
     }
 
-    @Transactional(readOnly=true)
     public ArrayList<SimpleObject> getLogs(String username, String patientId, Date startDateTime, Integer lastAuditLogId, Boolean prev, Boolean defaultView) {
         List<AuditLog> auditLogs = auditLogDao.getLogs(username, patientId, startDateTime, lastAuditLogId, prev, defaultView);
         return (ArrayList<SimpleObject>) (auditLogs.stream().map(AuditLog::map).collect(Collectors.toList()));
     }
 
-    @Transactional
     public void createAuditLog(AuditLogPayload log) {
         User user = Context.getAuthenticatedUser();
         Patient patient = null;
@@ -57,7 +55,6 @@ public class AuditLogServiceImpl implements AuditLogService {
         auditLogDao.saveAuditLog(auditLog);
     }
 
-    @Transactional
     public void createAuditLog(String patientUuid, String eventType, String message, Map<String, String> messageParams, String module ) {
         User user = Context.getAuthenticatedUser();
         Patient patient = null;
