@@ -12,7 +12,6 @@ import org.openmrs.module.auditlog.dao.AuditLogDao;
 import org.openmrs.module.auditlog.model.AuditLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,7 +50,7 @@ public class AuditLogDaoImpl implements AuditLogDao {
             criteria.add(Restrictions.eq("user.username", username));
         }
         if (patientIdentifier != null) {
-            List<Patient> patients = patientService.getPatients((String)null, patientIdentifier, (List)null, true);
+            List<Patient> patients = patientService.getPatients(null, patientIdentifier, null, true);
             ;
             if(patients.size() == 0){
                 return logs;
@@ -66,7 +65,6 @@ public class AuditLogDaoImpl implements AuditLogDao {
         return logs;
     }
 
-    @Transactional
     @Override
     public void saveAuditLog(AuditLog auditLog) {
         sessionFactory.getCurrentSession().saveOrUpdate(auditLog);

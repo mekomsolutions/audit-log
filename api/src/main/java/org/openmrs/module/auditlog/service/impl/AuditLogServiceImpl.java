@@ -13,6 +13,7 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.webservices.rest.SimpleObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +22,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class AuditLogServiceImpl implements AuditLogService {
 
     private AuditLogDao auditLogDao;
@@ -51,7 +53,6 @@ public class AuditLogServiceImpl implements AuditLogService {
         auditLog.setUuid(UUID.randomUUID().toString());
         auditLog.setModule(log.getModule());
         auditLogDao.saveAuditLog(auditLog);
-
     }
 
     public void createAuditLog(String patientUuid, String eventType, String message, Map<String, String> messageParams, String module ) {
